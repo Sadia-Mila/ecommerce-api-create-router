@@ -1,10 +1,10 @@
 step #1 : connect node.js and connect DB properly.
-Step #3 :Take a folder named database and inside it create a file named dbConnection.js. In this file take all the connection elements like mongoose. dbConnection part take inside a function for export it. Then import dbCollection in the main.js file. 
+Step #3 :Take a folder named database and inside it create a file named dbConnection.js. In this file take all the connection elements like mongoose. dbConnection part take inside a function for export it. Then import dbCollection in the main.js file. Be carefule about whether it is linked at the top part of the code.  
 
 step #3 : (dotenv) To keep the databaseconnection secret elements in more professonal way we can follow the following steps. 
-npm i dotenv
+(run)  npm i dotenv
 make a file in the root named (.env)
-take require env with config in main.js file e
+take require env with config in main.js file.
 in the file .env put:
 DB_USER_NAME = ecommerceapi
 DB_Password = .....
@@ -15,25 +15,27 @@ ${process.env.DB_USER_NAME}
 ${process.env.DB_Password}
 ${process.env.DB_NAME}
 
-then use backtick in the connection code and then the light is on. 
+then use backtick in the connection code and then the light will become on. 
 
 2nd way to make dbConnection more professonal: 
-in .env file write: 
+in the .env file write: 
 DB_URL = all connection code here and in the dbConnection file write    `${process.env.DB_URL}`
 
 Step #4: (API make)
-We have to make route for individual api. 
+We have to make seperate route for a individual api. 
 Make a route in the root > file index.js
 
 import express
 import router from express
 
-make a folder name api under route.
+make a folder named api under the route.
 make an index.js file under api folder
 import require express 
-import require router
+import require Router
 
 router.use("/api/v1, (req, res)=>{
 
 })
 
+To make an api make a api folder under route.
+under api filder make one index.js file
