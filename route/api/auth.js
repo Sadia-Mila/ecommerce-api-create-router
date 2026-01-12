@@ -1,12 +1,7 @@
 const express = require("express");
+const signupController = require("../../controllers/signupController");
 const router = express.Router();
 
-router.post("/signup", (req, res) => {
-  res.send({
-    name: "Itmam",
-    email: "itmam@gmail.com",
-    password: "2345",
-  });
-});
+router.post("/signup", signupController);
 
 module.exports = router;

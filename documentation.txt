@@ -38,4 +38,20 @@ router.use("/api/v1, (req, res)=>{
 })
 
 To make an api make a api folder under route.
-under api filder make one index.js file
+under api filder make one index.js file ----------------------------
+
+//to send file to the DB the following steps need to done-
+Step # 5: Make a folder in the root named controllers. under this folder make a file named signupController.js. import express and router and the make a function in the name of the file and export the file. connect the signup controller with auth.js.
+
+step #6: Create a moldel folder in the root and make a userSchema.js. Import mongoose, schema and then take const userSchema = new Schema({   }) then export it. take data head like (firstName, lastName, email, password, isVerified)
+firstName:{
+    type: String,
+    required: true,
+},
+
+in this way take all the data heading. 
+
+Step #7 : (email validation) email validation in javascript Stack overflow (take email validation code ) and take it in the signupController file e. take a folder named helpers=> take a file emailValidation.js. In this file take a function => function name is the file name. export the function. in this function write const emailpatter = give pattern from regex. under it give emailReg.test(email). also pass email as a parameter in the function too. 
+
+
+Step #8: go to the signupController and send data to the database. 
