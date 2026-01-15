@@ -55,3 +55,8 @@ Step #7 : (email validation) email validation in javascript Stack overflow (take
 
 
 Step #8: go to the signupController and send data to the database. 
+step #9: Make a hash password. install bcrypt. => bcrypt.hash(password, 10, function(err, hash){
+    //store hash in your password DB 
+})
+
+step # 10: 
