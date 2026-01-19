@@ -59,4 +59,10 @@ step #9: Make a hash password. install bcrypt. => bcrypt.hash(password, 10, func
     //store hash in your password DB 
 })
 
-step # 10: 
+step # 10: Make a duplicate email error using length. 
+step # 11: Make a require password error. 
+step # 12: Make otp option using ==>> crypto 
+step # 13: Make otp expire function ==>> const expireOtp = new Date(Date.now() + 10 * 60 * 1000) 
+step # 14: Make a controller nodeMailer ===>>> install  nodeMailer and cofig using helpers ==>> emailVarification
+step # 15: Make sure otp email is correct ==>> make otp controller. 
+step # 16: Set up otp expire time limit ==>> make otpController uner the folder controller ==>>  

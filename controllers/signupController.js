@@ -3,10 +3,12 @@ const router = express.Router();
 const userSchema = require("../model/userSchema");
 const emailValidation = require("../helpers/emailValidation");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
+const { log } = require("console");
+const emailVarification = require("../helpers/emailVarification");
 
 async function signupController(req, res) {
   const { firstName, lastName, email, password } = req.body;
-  // console.log("request body", req.body);
 
   if (!firstName || !lastName) {
     return res.json({
@@ -29,14 +31,19 @@ async function signupController(req, res) {
     });
   }
 
-  const duplicateEmail = await userSchema.find({email});
-  console.log(duplicateEmail);
+  const duplicateEmail = await userSchema.find({ email });
+  // console.log(duplicateEmail);
 
-  if (duplicateEmail.length > 0) {
+  if (duplicateEmail > 0) {
     return res.json({
       message: "Duplicate Email",
     });
   }
+
+  const otp = crypto.randomInt(100000, 999999).toString();
+  console.log("Data sent with otp");
+
+  const expireOtp = new Date(Date.now() + 10 * 60 * 1000);
 
   bcrypt.hash(password, 10, function (err, hash) {
     const user = new userSchema({
@@ -44,10 +51,13 @@ async function signupController(req, res) {
       lastName,
       email,
       password: hash,
+      otp,
+      expireOtp,
     });
+    emailVarification(email, otp);
     user.save();
     res.json({
-      message: "Data Send with hash password",
+      message: "Data Send",
     });
   });
 }
