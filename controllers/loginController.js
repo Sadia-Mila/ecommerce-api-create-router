@@ -1,5 +1,6 @@
 const emailValidation = require("../helpers/emailValidation");
 const userSchema = require("../model/userSchema");
+const bcrypt = require("bcrypt");
 
 async function loginController(req, res) {
   const { email, password } = req.body;
@@ -10,23 +11,23 @@ async function loginController(req, res) {
     return res.json({ error: "Password is required" });
   }
   if (!emailValidation(email)) {
-     return res.json({ error: "Email format is not valid" });
-    
+    return res.json({ error: "Email format is not valid" });
   }
 
-  const dublicateUser = await userSchema.findOne({email})
-  if(!dublicateUser.email){
+  const user = await userSchema.findOne({ email });
+  if (!user) {
     return res.json({
-        error: "Email not found in DB"
-    })
-    
-  }
-  if(!dublicateUser.password){
+      error: "Email not found in DB",
+    });
+  } 
+  const isPasswordMatched = await bcrypt.compare(password, user.password);
+  if (!isPasswordMatched) {
     return res.json({
-        error: "password not found in DB"
-    })
-    
+      message: "Invalid Password",
+    });
+  } else{
+      res.end("You have successfully Completed you Login");
+
   }
-  res.end("login Completed")
 }
 module.exports = loginController;
