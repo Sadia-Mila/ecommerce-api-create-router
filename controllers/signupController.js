@@ -4,7 +4,6 @@ const userSchema = require("../model/userSchema");
 const emailValidation = require("../helpers/emailValidation");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
-const { log } = require("console");
 const emailVarification = require("../helpers/emailVarification");
 
 async function signupController(req, res) {
@@ -41,7 +40,7 @@ async function signupController(req, res) {
   }
 
   const otp = crypto.randomInt(100000, 999999).toString();
-  console.log("Data sent with otp");
+  // console.log("Data sent with otp");
 
   const expireOtp = new Date(Date.now() + 10 * 60 * 1000);
 
