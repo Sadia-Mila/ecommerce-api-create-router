@@ -1,5 +1,5 @@
 step #1 : connect node.js and connect DB properly.
-Step #3 :Take a folder named database and inside it create a file named dbConnection.js. In this file take all the connection elements like mongoose. dbConnection part take inside a function for export it. Then import dbCollection in the main.js file. Be carefule about whether it is linked at the top part of the code.  
+Step #2 :Take a folder named database and inside it create a file named dbConnection.js. In this file take all the connection elements like mongoose. dbConnection part take inside a function for export it. Then import dbCollection in the main.js file. Be carefule about whether it is linked at the top part of the code.  
 
 step #3 : (dotenv) To keep the databaseconnection secret elements in more professonal way we can follow the following steps. 
 (run)  npm i dotenv
@@ -23,7 +23,7 @@ DB_URL = all connection code here and in the dbConnection file write    `${proce
 
 Step #4: (API make)
 We have to make seperate route for a individual api. 
-Make a route in the root > file index.js
+Make a route in the root ==>> file index.js
 
 import express
 import router from express
