@@ -23,27 +23,53 @@ DB_URL = all connection code here and in the dbConnection file write    `${proce
 
 Step #4: (API make)
 We have to make seperate route for a individual api. 
-Make a route in the root ==>> file index.js
+Make a route in the root ==>> file index.js. 
+route>>index.js
 
-import express
-import router from express
+const express = require('express')
+const router = express.Router()
+const apiRoute = require('./api')
+const authRoute = require('./api/auth')
 
-make a folder named api under the route.
-make an index.js file under api folder
-import require express 
-import require Router
+router.use("/api/v1", apiRoute)
+router.use("/auth", authRoute)
 
-router.use("/api/v1, (req, res)=>{
+module.exports = router
 
-})
+To make an api make a api folder under route. Make an index.js file under api folder
+route>>api>>index.js
+const express = require('express')
+const router = express.Router()
+const authRoute = require('./auth')
+const shopRoute = require('./shop')
+router.use(express.json())
 
-To make an api make a api folder under route.
-under api filder make one index.js file ----------------------------
+router.use("/auth", authRoute)
+router.use("/shop", shopRoute)
+
+module.exports = router
+
+route>>api>>auth.js
+
+const express = require("express");
+const signupController = require("../../controllers/signupController");
+const {otpController, resendOtpController} = require("../../controllers/otpController");
+const loginController = require("../../controllers/loginController");
+const router = express.Router();
+
+router.post("/signup", signupController);
+router.post("/otpVerify", otpController);
+router.post("/resendotp", resendOtpController);
+router.post("/login", loginController);
+
+module.exports = router;
+
+
 
 //to send file to the DB the following steps need to done-
 Step # 5: Make a folder in the root named controllers. under this folder make a file named signupController.js. import express and router and the make a function in the name of the file and export the file. connect the signup controller with auth.js.
 
-step #6: Create a moldel folder in the root and make a userSchema.js. Import mongoose, schema and then take const userSchema = new Schema({   }) then export it. take data head like (firstName, lastName, email, password, isVerified)
+step #6: Create a moldel folder in the root and make a userSchema.js. Import mongoose, schema and then take const userSchema = new Schema({   }) then export it. take data head like (firstName, lastName, email, password, otp, expireOtp, isVerified,)
 firstName:{
     type: String,
     required: true,
@@ -65,4 +91,8 @@ step # 12: Make otp option using ==>> crypto
 step # 13: Make otp expire function ==>> const expireOtp = new Date(Date.now() + 10 * 60 * 1000) 
 step # 14: Make a controller nodeMailer ===>>> install  nodeMailer and cofig using helpers ==>> emailVarification
 step # 15: Make sure otp email is correct ==>> make otp controller. 
-step # 16: Set up otp expire time limit ==>> make otpController uner the folder controller ==>>  
+step # 16: create resendOtpController function in the optController ===>> write otpController code
+step # 17: Create a loginController.js ==>> email.password required, email format valid, check whether existing user is in DB, verify existing user,  check hash password and make login successfull. 
+step # 18: Make sessor system using express.sesson.
+step # 19: Create dashboard route 
+stpe # 20: Make logout route using session destroy

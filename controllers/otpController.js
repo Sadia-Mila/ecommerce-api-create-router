@@ -1,7 +1,6 @@
 const userSchema = require("../model/userSchema");
 const crypto = require("crypto");
 
-
 async function otpController(req, res) {
   const { email, otp } = req.body;
   const user = await userSchema.findOne({ email });

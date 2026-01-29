@@ -14,20 +14,43 @@ async function loginController(req, res) {
     return res.json({ error: "Email format is not valid" });
   }
 
-  const user = await userSchema.findOne({ email });
-  if (!user) {
-    return res.json({
-      error: "Email not found in DB",
-    });
-  } 
-  const isPasswordMatched = await bcrypt.compare(password, user.password);
-  if (!isPasswordMatched) {
-    return res.json({
-      message: "Invalid Password",
-    });
-  } else{
-      res.end("You have successfully Completed you Login");
+  const existingUser = await userSchema.findOne({ email });
 
+  if (!existingUser) {
+    return res.json({ message: "user is not found in DB" });
+  }
+  if (!existingUser.isVerified) {
+    return res.json({ message: "user is not verified" });
+  } else {
+    bcrypt.compare(password, existingUser.password, function (err, result) {
+      if (result) {
+        return res.json({ message: "Login Done Successfully" });
+      } else {
+        res.json({ message: "Password is not matched" });
+      }
+    });
+    req.session.isVerified = true;
+    req.session.userSchema = {
+      id: existingUser.id,
+      email: existingUser.email,
+      firstName: existingUser.firstName,
+    };
   }
 }
-module.exports = loginController;
+
+function logOutController(req, res) {
+  req.session.destroy(function (err) {
+    if (err) {
+      res.status(400).json({ error: "Something Wrong!" });
+    }
+    res.status(200).json({
+      message: "Logout Done",
+    });
+  });
+}
+
+function dashboardController(req, res) {
+  res.json({ message: "Wel Come to Dashboard" });
+}
+
+module.exports = { loginController, logOutController, dashboardController };

@@ -19,8 +19,7 @@ const info = await transporter.sendMail({
     html: `<h1>Your OTP is: ${otp}</h1>`,
   });
 
-  console.log("Message sent:", info.messageId);
-    
+      
 }
 
 module.exports = emailVarification
