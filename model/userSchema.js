@@ -20,6 +20,7 @@ const userSchema = new Schema({
   },
   otp: {
     type: String,
+    default: Date.now,
   },
   expireOtp: {
     type: Date,
@@ -27,6 +28,11 @@ const userSchema = new Schema({
   isVerified: {
     type: Boolean,
     default : false,
+  },
+  role:{
+    type: String, 
+    delault: "user",
+    enum: ["user", "admin"],
   },
 
   

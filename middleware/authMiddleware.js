@@ -1,5 +1,5 @@
 function authMiddleware(req, res, next) {
-    if(req.session.isVerified){
+    if(req.session.isAuth){
         next()
 
     }

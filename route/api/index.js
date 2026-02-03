@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const authRoute = require('./auth')
-const shopRoute = require('./shop')
+const categoryRoute = require('./category')
 router.use(express.json())
 
 router.use("/auth", authRoute)
-router.use("/shop", shopRoute)
+router.use("/category", categoryRoute)
 
 module.exports = router

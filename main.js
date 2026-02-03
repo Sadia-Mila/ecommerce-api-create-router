@@ -3,6 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const dbConnection = require("./dababase/dbConnection");
 const route = require("./route");
+const categoryController = require("./controllers/categoryController");
 const app = express();
 const port = 3000;
 app.use(express.json());

@@ -29,7 +29,7 @@ async function loginController(req, res) {
         res.json({ message: "Password is not matched" });
       }
     });
-    req.session.isVerified = true;
+    req.session.isAuth = true;
     req.session.userSchema = {
       id: existingUser.id,
       email: existingUser.email,

@@ -33,7 +33,7 @@ async function signupController(req, res) {
   const duplicateEmail = await userSchema.find({ email });
   // console.log(duplicateEmail);
 
-  if (duplicateEmail > 0) {
+  if (duplicateEmail.length> 0) {
     return res.json({
       message: "Duplicate Email",
     });
@@ -52,6 +52,7 @@ async function signupController(req, res) {
       password: hash,
       otp,
       expireOtp,
+      
     });
     emailVarification(email, otp);
     user.save();
