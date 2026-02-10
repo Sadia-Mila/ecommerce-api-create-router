@@ -20,7 +20,6 @@ const userSchema = new Schema({
   },
   otp: {
     type: String,
-    default: Date.now,
   },
   expireOtp: {
     type: Date,
@@ -31,7 +30,7 @@ const userSchema = new Schema({
   },
   role:{
     type: String, 
-    delault: "user",
+    default: "user",
     enum: ["user", "admin"],
   },
 

@@ -19,14 +19,55 @@ function categoryController(req, res) {
     });
   }
 }
-
+//get all category
 async function getAllCategory(req, res) {
-    const allCategoryList = await categorySchema.find({})
-    res.json({
-        message: "category Paichi",
-        data : allCategoryList
-    })
-    
+  const allCategoryList = await categorySchema.find({});
+  res.json({
+    message: "category Paichi",
+    data: allCategoryList,
+  });
 }
 
-module.exports = {categoryController, getAllCategory};
+//update category
+async function updateCategoryController(req, res) {
+  const { id } = req.params;
+  const { name, description } = req.body;
+  const updateCategory = await categorySchema.findById(id);
+  updateCategory.name = name,
+  updateCategory.description = description,
+  await updateCategory.save(),
+  res.json({
+    message: "Category updated",
+    data: updateCategory,
+  })
+
+}
+//category delete-one(hard)
+async function deleteCategoryController(req, res) {
+  const { id } = req.params
+  const deleteCategory = await categorySchema.findByIdAndDelete(id)
+  res.json({message: "Data Deleted",
+    data: deleteCategory
+
+  })
+
+  
+}
+
+async function deleteallCategory(req, res) {
+  const{id} = req.params
+  const deleteall = await categorySchema.deleteMany({})
+  res.json({
+    message: "All category is Deleted",
+    data: deleteall
+  })
+  
+}
+
+module.exports = {
+  categoryController,
+  getAllCategory,
+  updateCategoryController,
+  deleteCategoryController,
+  deleteallCategory
+};
