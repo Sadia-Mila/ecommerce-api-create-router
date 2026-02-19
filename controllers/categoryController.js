@@ -2,9 +2,15 @@ const express = require("express");
 const categorySchema = require("../model/categorySchema");
 const router = express.Router();
 
-function categoryController(req, res) {
+async function categoryController(req, res) {
   const { name, description } = req.body;
   try {
+    const existingCategory = await categorySchema.findOne({name})
+        if(existingCategory){
+            return res.json({
+                message: "Category Already Exists"
+            })
+        }
     const createCategory = categorySchema({
       name,
       description,
