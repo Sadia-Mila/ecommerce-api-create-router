@@ -1,3 +1,4 @@
+const uploadImage = require("../middleware/cloudinary");
 const productSchema = require("../model/productSchema");
 
 function productController(req, res) {
@@ -8,10 +9,18 @@ function productController(req, res) {
     size,
     color,
     category,
+    image,
     ram,
     storage,
-    timestamps,
   } = req.body;
+
+  // ==========================
+
+    const imgPath = req.file.path
+    // console.log(imgPath);
+    const imgUrl = uploadImage(imgPath)
+    
+  // ==========================
   const createproduct = productSchema({
     name,
     description,
@@ -19,9 +28,11 @@ function productController(req, res) {
     size,
     color,
     category,
+    image: imgUrl.secure_url,
+    // image: `http://localhost:3000/uploads/${req.file.filename}`,
     ram,
+
     storage,
-    timestamps,
   });
   (createproduct.save(),
     res.json({
@@ -70,21 +81,25 @@ async function updateProduct(req, res) {
 
 async function singleproductdelete(req, res) {
   const { id } = req.params;
-  const deleteProduct = await productSchema.findByIdAndDelete(id)
+  const deleteProduct = await productSchema.findByIdAndDelete(id);
   res.json({
     message: "Single Product Delete",
-    data:deleteProduct
-  })
-
+    data: deleteProduct,
+  });
 }
 
 async function deleteAllProduct(req, res) {
-  const deleteAll = await productSchema.deleteMany({})
+  const deleteAll = await productSchema.deleteMany({});
   res.json({
     message: "All Product is deleted",
-    data:deleteAll
-  })
-  
+    data: deleteAll,
+  });
 }
 
-module.exports = { productController, getAllProduct, updateProduct, singleproductdelete, deleteAllProduct };
+module.exports = {
+  productController,
+  getAllProduct,
+  updateProduct,
+  singleproductdelete,
+  deleteAllProduct,
+};

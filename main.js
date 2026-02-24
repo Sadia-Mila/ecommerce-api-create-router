@@ -5,6 +5,8 @@ const dbConnection = require("./dababase/dbConnection");
 const route = require("./route");
 const categoryController = require("./controllers/categoryController");
 const app = express();
+const path = require('path')
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 const port = 3000;
 app.use(express.json());
 

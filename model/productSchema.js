@@ -5,7 +5,6 @@ const productSchema = new Schema({
   name: {
     type: String,
     trim: true,
-    unique: true,
     required: true,
   },
   description: {
@@ -23,6 +22,9 @@ const productSchema = new Schema({
     type: String, 
   },
   category:{
+    type: String, 
+  },
+  image:{
     type: String, 
   },
   ram:{

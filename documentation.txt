@@ -96,3 +96,29 @@ step # 17: Create a loginController.js ==>> email.password required, email forma
 step # 18: Make sessor system using express.sesson.
 step # 19: Create dashboard route 
 stpe # 20: Make logout route using session destroy
+Image Upload:
+Step # 21: Installmulter, in product.js e require multer and uploads, make a folder in the root named uploads. In the product route in the middle put upload.single('image'), go to product Schema and put there image, type "String". Then go to the product controller and insert image in two places. 
+step # 22: Then go to the postman complete the form data in the body. See data without image. 
+step # 23: Go to product js from api ==>> Make disk storage from multer ==>> Split it.
+step # 24: Go to the product controller and update the image url = like //image : `http://localhost:3000/uploads/${req.file.filename}`
+step # 25: GO to search ==>> static image show in node.js ==>> express Doc place in root index.js ==>> rename the folder name.
+
+To make the file light we preseve the image in cloudinary. Only databas will have a string of the image.
+ Step # 27: To preseve the image in the clousinary make a file in the middleware named Cloudinary.js
+ Step # 28: Signup to the cloudinary and tick optamize, personal, developer, images, node.js
+ Step # 29: instll cloudanary and create a file named cloudanary.js in the middleware. go to the npm cloudanary and take require it. Go to the cloudanary and click logo and click get started. take the configuration code in the file. update the api key and secret key.  and from image and video Api>SKD's>Backend SKD's> node.js skd>
+ and put the below code and change the export 
+
+ const uploadImage = async (filename)=>{
+    const result  = await cloudinary.uploader.upload(filename)
+   console.log(result);
+   return result;
+}
+export the uploadImage file
+
+
+
+
+
+if there is server dns problem use this in the root file in main.js as class no. 89
+require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"])
