@@ -1,7 +1,7 @@
 const uploadImage = require("../middleware/cloudinary");
 const productSchema = require("../model/productSchema");
 
-function productController(req, res) {
+async function productController(req, res) {
   const {
     name,
     description,
@@ -15,10 +15,11 @@ function productController(req, res) {
   } = req.body;
 
   // ==========================
-
+  // console.log(req.file.path);
+  
     const imgPath = req.file.path
     // console.log(imgPath);
-    const imgUrl = uploadImage(imgPath)
+    const imgUrl = await uploadImage(imgPath)
     
   // ==========================
   const createproduct = productSchema({
@@ -34,7 +35,7 @@ function productController(req, res) {
 
     storage,
   });
-  (createproduct.save(),
+  (await createproduct.save(),
     res.json({
       message: "Product Added",
       data: createproduct,
@@ -71,7 +72,6 @@ async function updateProduct(req, res) {
   updateProduct.category = category;
   updateProduct.ram = ram;
   updateProduct.storage = storage;
-  updateProduct.timestamps = timestamps;
   await updateProduct.save();
   res.json({
     message: "Product is updated",

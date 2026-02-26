@@ -116,6 +116,17 @@ To make the file light we preseve the image in cloudinary. Only databas will hav
 }
 export the uploadImage file
 
+step # 30: To make the image location dynamic go to the Product Controller and write 
+    const imgPath = req.file.path
+    // console.log(imgPath);
+    const imgUrl = uploadImage(imgPath) 
+    
+    
+    Then change the image url like:     image: imgUrl.secure_url,
+
+Stpe # 31: In this stage image link still in the uploads folder and in DB and in Cloudanary. To remove the file from uploads we will go to the node fs unlinkSync. Here we put required in the cloudanary file and give fs.unlinkSync(filename). This will unlink the link form uploads. 
+
+
 
 
 
