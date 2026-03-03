@@ -5,10 +5,12 @@ const dbConnection = require("./dababase/dbConnection");
 const route = require("./route");
 const categoryController = require("./controllers/categoryController");
 const app = express();
+const cors = require('cors')
 const path = require('path')
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 const port = 3000;
 app.use(express.json());
+app.use(cors())
 
 app.use(
   session({
